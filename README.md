@@ -23,8 +23,6 @@ ZENHARMONY_PROJECT/
 │ │ ├── 03_silver_layer_setup.sql
 │ │ └── 04_gold_layer_setup.sql
 │ │
-│ ├── zen_dbt/
-│ │
 │ ├── zen_orchestration/
 │ │ └── zharmony_automation.py
 │ │
@@ -32,7 +30,8 @@ ZENHARMONY_PROJECT/
 │ ├── zharmonyingest_csv.py
 │ └── zharmonyingest_api.py
 │
-├── .env.zenharmony
+├── .env.example (update name to .env.zenharmony)
+├── .gitignore
 ├── README.md
 ├── requirements.txt
 └── SOLUTION.md
@@ -213,7 +212,7 @@ All tables and views should return data with no errors.
 
 ## **Troubleshooting**
 
-| Symptom | Likely Cause | Fix |
+| Error | Probable Cause | Fix |
 |----------|---------------|-----|
 | `cannot connect to database` | Docker not running | `docker start zen-postgres` |
 | `permission denied for schema` | Wrong credentials | Check `.env.zenharmony` |
@@ -245,7 +244,7 @@ All tables and views should return data with no errors.
    python .\zen-reqruitment-pipeline\zen_orchestration\zharmony_automation.py
    ```
 
-5. Validate the data in **DBeaver** or **psql**
+5. Validate the data in DBeaver or psql
 
 ---
 
