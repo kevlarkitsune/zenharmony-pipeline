@@ -99,7 +99,7 @@ def run_sql_file(engine, path: str):
     if not statements:
         return
 
-    log(f"Applying SQL: {os.path.basename(path)} Successful.")
+    log(f"Applying SQL: {os.path.basename(path)} ...")
     with engine.begin() as conn:
         for stmt in statements:
             conn.execute(text(stmt))

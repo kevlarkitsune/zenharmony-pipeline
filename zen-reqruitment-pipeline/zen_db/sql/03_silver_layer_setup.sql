@@ -69,7 +69,7 @@ normalized AS
             WHEN close_date IS NOT NULL AND open_date IS NOT NULL AND close_date < open_date
                 THEN NULL
             ELSE close_date
-        END AS close_date_fixed\
+        END AS close_date_fixed
 
     FROM unified
 
@@ -77,8 +77,7 @@ normalized AS
     --FUTURE CHECK: URL NORMALIZATION (NOT CURRENTLY NEEDED)
     --FUTURE CHECK: COMPANY NAME NORMALIZATION (NOT CURRENTLY NEEDED)
     --FUTURE CHECK: ABSOLUTE URL NORMALIZATION (NOT CURRENTLY NEEDED)
-    -- -> All accounted for in SELECT COUNT(*) FROM zen_silver.jobview_dq_anomalies;
-
+    -- -> All accounted for in jobview_dq_anomalies;
 )
 
 --DE-DUPLICATION

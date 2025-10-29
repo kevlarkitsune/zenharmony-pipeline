@@ -48,7 +48,7 @@ ZenHarmony enables a fully automated data pipeline that:
 3. Ingests both raw CSV and live API data into the Bronze layer.
 4. Cleans and normalizes data through Silver-layer transformations.
 5. Aggregates and enriches data in Gold-layer analytical views.
-6. Runs the full ETL and orchestration pipeline with a **single Python command**.
+6. Runs the full ETL and orchestration pipeline with a single Python command.
 7. Tracks and exposes data quality anomalies for transparency.
 
 **Core Features**
