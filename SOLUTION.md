@@ -103,5 +103,5 @@ Because each step uses “create if not exists” logic and truncates before ins
 ZenHarmony achieves a fully operational data pipeline architecture.
 
 ## Author
-**kevlarcode**  
+**kevlarkitsune**  
 *Create Harmony, Orchestrate Symphony.*

@@ -1,59 +1,9 @@
-# READ.md - Recruitment Data Pipeline: OfferZen Job Board Analytics
-ZenHarmony is an automated, end-to-end ETL pipeline that demonstrates practical data engineering, analytics modeling, ingestion and orchestration pipelines.  This stack is built entirely with Python, PostgreSQL, and SQLAlchemy.
+# **READ.md - Recruitment Data Pipeline: OfferZen Job Board Analytics**
+ZenHarmony is an automated, end-to-end ETL pipeline that utilizing practical data engineering, analytics modeling, ingestion and orchestration pipelines.  This stack is built entirely with Python, PostgreSQL, and SQLAlchemy.
 
 ---
 
-## Project Overview
-ZenHarmony allows for a modular data pipeline that:
-1. **Installs** all required packages if non existant.
-2. **Creates** all required database schemas (Bronze Layer, Silver Layer, Gold Layer) if non existant.  
-3. **Ingests** raw CSV and API data into the Bronze layer.  
-4. **Transforms** and **cleans** data through Silver normalization logic.  
-5. **Aggregates** into Gold-layer analytics views.  
-6. **Runs end-to-end orchestration** using a single Python command.
-7. **Logs** and **tracks** source data quality anomalies for resolution.
-
-ZenHarmony Utilizes:
-- Modern layered architecture (Bronze/Silver/Gold)
-- Data quality checks and normalization
-- Idempotent orchestration (safe to rerun)
-- Python + SQLAlchemy integration with PostgreSQL
-- Full automation via one script
-
----
-
-## PostgreSQL Setup (via Docker)
-
-Create PostgreSQL Container (If not installed locally):
-
-```bash
-docker run -d --name zen-postgres -e POSTGRES_USER=zenuser -e POSTGRES_PASSWORD=zenpassword -e POSTGRES_DB=zenharmony_BI -p 5432:5432 postgres:16
-```
-
-Once the container is running:
-
-0. Duplicate `.env.example` → rename it to `.env.zenharmony`
-
-1. Ensure the connection details, example:
-  
-   ```
-   PG_HOST=localhost
-   PG_PORT=5432
-   PG_DB=zenharmony_BI
-   PG_USER=zenuser
-   PG_PASSWORD=zenpassword
-   ```
-2. Proceed with the orchestration steps below.
-
-[Note] To stop or clean up the container:
-```bash
-docker stop zenharmony_db
-docker rm zenharmony_db
-```
-
----
-
-## Project Structure
+## **Project Structure**
 
 ```
 ZENHARMONY_PROJECT/
@@ -87,46 +37,109 @@ ZENHARMONY_PROJECT/
 ├── requirements.txt
 └── SOLUTION.md
 ```
+
 ---
 
-## How to Run the Pipeline
+## **Project Overview**
 
-### 1. Create (If Not Exists) & Activate Virtual Environment
+ZenHarmony enables a fully automated data pipeline that:
+1. Installs all required Python dependencies automatically.
+2. Creates PostgreSQL database schemas (**Bronze**, **Silver**, **Gold**) if not present.
+3. Ingests both raw CSV and live API data into the Bronze layer.
+4. Cleans and normalizes data through Silver-layer transformations.
+5. Aggregates and enriches data in Gold-layer analytical views.
+6. Runs the full ETL and orchestration pipeline with a **single Python command**.
+7. Tracks and exposes data quality anomalies for transparency.
 
-If .venv does not exist in the project, create it with:
+**Core Features**
+- Modern layered ETL architecture (Bronze / Silver / Gold)
+- Idempotent automation (safe to rerun anytime)
+- Automated dependency and schema management
+- Clear separation between ingestion, transformation, and presentation
+
+---
+
+## **PostgreSQL Setup (via Docker)**
+
+To replicate the project locally with Dockerized PostgreSQL:
+
+### **Create PostgreSQL Container**
+
+Run this command from your project root in PowerShell or terminal:
+
+```bash
+docker run -d --name zen-postgres -e POSTGRES_USER=zenuser -e POSTGRES_PASSWORD=zenpassword -e POSTGRES_DB=zenharmony_BI -p 5432:5432 postgres:16
+```
+
+Once the container is running, create your environment file:
+
+1. Duplicate `.env.example` → rename it to `.env.zenharmony`
+2. Update the values:
+
+   ```bash
+   PG_HOST=localhost
+   PG_PORT=5432
+   PG_DB=zenharmony_BI
+   PG_USER=zenuser
+   PG_PASSWORD=zenpassword
+   ```
+
+To verify your container is active:
+```bash
+docker ps
+```
+
+To stop or remove the container:
+```bash
+docker stop zen-postgres
+docker rm zen-postgres
+```
+
+---
+
+## **How to Run the Pipeline**
+
+### **1. Create & Activate the Virtual Environment**
+
+If `.venv` doesn’t exist, create one:
 ```bash
 python -m venv .venv
 ```
-Before running the orchestration, activate the virtual environment with:
+
+Activate it:
 ```bash
 .\.venv\Scripts\Activate
 ```
-⚠️ If receiving a policy warning when running the activation script above on VSCode PowerShell, run the following command and retry running the activate command:
+
+If PowerShell blocks activation, run the below, followed by rerunning the activation script above:
 ```bash
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
 
-### 2. Install Dependencies (Optional, the Orchestration Tool will do this Automatically)
+---
+
+### **2. Install Dependencies (Optional)**
+
+You can run this manually, but the orchestration tool will install missing packages automatically:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-> ⚠️ The orchestration script will auto-check and install these if missing.
-
 ---
 
-### 3. Run Full Orchestration Automation Tool (ZenHarmony)
+### **3. Run Full ZenHarmony Orchestration**
 From the project root:
 ```bash
 python .\zen-reqruitment-pipeline\zen_orchestration\zharmony_automation.py
 ```
 
-This script will:
-- Verify package dependencies  
-- Build all schemas (Bronze, Silver, Gold)  
-- Apply all SQL transformations  
-- Ingest the CSV and API data  
-- Confirm successful orchestration
+This script:
+- Installs dependencies (if needed)
+- Builds the PostgreSQL schemas
+- Applies all SQL scripts in order
+- Ingests CSV and API data
+- Confirms successful orchestration in console logs
 
 You’ll see console logs like:
 ```
@@ -149,9 +162,9 @@ Loaded 6 rows into zen_bronze.raw_current
 
 ---
 
-## Validation Checks
+## **Validation Checks**
 
-Once orchestration completes, open DBeaver or psql and run:
+Once orchestration completes, open DBeaver or psql and verify:
 
 ```sql
 --1.1 Confirm Bronze has data (Sanity Check)
@@ -187,56 +200,55 @@ All tables and views should return data with no errors.
 
 ---
 
-## Technologies Used
+## **Technologies Used**
+
 | Layer | Technology | Purpose |
 |-------|-------------|----------|
-| Ingestion | Python (Pandas, SQLAlchemy, pg8000) | Raw CSV + API ingestion |
-| Transformation | PostgreSQL (SQL Views) | Cleaning, normalization, Quality Checks |
-| Orchestration | Python Automation | Schema creation + pipeline execution |
-| Environment | Docker (optional) | Reproducible local PostgreSQL environment |
+| Ingestion | Python (Pandas, SQLAlchemy, pg8000) | CSV + API ingestion |
+| Transformation | PostgreSQL Views | Cleaning, normalization, DQ checks |
+| Orchestration | Python Automation | Schema + pipeline execution |
+| Environment | Docker | Local PostgreSQL instance |
 
 ---
 
-## Troubleshooting
+## **Troubleshooting**
+
 | Symptom | Likely Cause | Fix |
 |----------|---------------|-----|
-| `cannot connect to database` | Docker container not running | `docker start zenharmony_db` |
-| `permission denied for schema` | wrong user/password | Check `.env.zenharmony` credentials |
-| `ModuleNotFoundError` | missing packages | run `pip install -r requirements.txt` |
-| `cannot run .\.venv\Scripts\Activate` | MS local machine policy issue | run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` |
+| `cannot connect to database` | Docker not running | `docker start zen-postgres` |
+| `permission denied for schema` | Wrong credentials | Check `.env.zenharmony` |
+| `ModuleNotFoundError` | Missing dependency | `pip install -r requirements.txt` |
+| PowerShell activation blocked | Policy restriction | `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` |
 
 ---
 
-## Output Example
-| job_id | title | department | location | company_name | open_date | close_date |
-|--------|--------|-------------|-----------|---------------|------------|-------------|
-| 6351072002 | Content Marketing Manager | Marketing | Cape Town | OfferZen | 2025-10-08 | NULL |
+## **Replicating This Project**
 
-## Replicating my Exact Steps:
+1. Clone the repository  
+   ```bash
+   git clone https://github.com/kevlarkitsune/zenharmony-pipeline.git
+   cd zenharmony-pipeline
+   ```
 
-1. Open ZenHarmony_Project Folder in VS Code.
-2. Open Docker. 
-3. Open Powershell Terminal in VS Code, ensure you are in the ZenHarmony_Project root directory.
-4. Create your Postgres DB container for Docker in your terminal:
+2. Start PostgreSQL (Docker)
    ```bash
    docker run -d --name zen-postgres -e POSTGRES_USER=zenuser -e POSTGRES_PASSWORD=zenpassword -e POSTGRES_DB=zenharmony_BI -p 5432:5432 postgres:16
    ```
-5. Activate your virtual environment in your terminal (See Troubleshooting if you run into an error): 
+
+3. Activate Virtual Environment  
    ```bash
-   First Run:
-   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-   
-   Then Run:
-   .\.venv\Scripts\Activate 
+   .\.venv\Scripts\Activate
    ```
-6. Run your Orchestration Tool:
+
+4. Run Orchestration Tool  
    ```bash
-   python .\zen-reqruitment-pipeline\zen_source\zharmony_automation.py
+   python .\zen-reqruitment-pipeline\zen_orchestration\zharmony_automation.py
    ```
-8.  Perform your data validation checks in DBeaver or psql.
+
+5. Validate the data in **DBeaver** or **psql**
 
 ---
 
 ## Author
-**kevlarcode**  
+**kevlarkitsune**  
 *Create Harmony, Orchestrate Symphony.*
