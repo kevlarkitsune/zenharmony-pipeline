@@ -1,4 +1,4 @@
-# **READ.md - Recruitment Data Pipeline: OfferZen Job Board Analytics**
+# **ZenHarmony Data Pipeline: OfferZen Job Board Analytics**
 ZenHarmony is an automated, end-to-end ETL pipeline that utilizing practical data engineering, analytics modeling, ingestion and orchestration pipelines.  This stack is built entirely with Python, PostgreSQL, and SQLAlchemy.
 
 ---
