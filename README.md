@@ -73,7 +73,7 @@ docker run -d --name zen-postgres -e POSTGRES_USER=zenuser -e POSTGRES_PASSWORD=
 
 Once the container is running, create your environment file:
 
-1. Duplicate `.env.example` → rename it to `.env.zenharmony`
+1. Rename `.env.example` to `.env.zenharmony`
 2. Update the values:
 
    ```bash
