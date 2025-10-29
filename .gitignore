@@ -9,7 +9,8 @@ __pycache__/
 # ENVIRONMENT FILES
 .env
 .env.*
-!example.env
+.env.zenharmony
+!.env.example
 
 # IDE & EDITOR CONFIGS
 .vscode/
@@ -17,7 +18,7 @@ __pycache__/
 *.sublime-project
 *.sublime-workspace
 
-# BUILD, LOGS AND ARTIFACTS
+# BUILD / LOGS / ARTIFACTS
 *.log
 *.sqlite3
 *.db
@@ -32,11 +33,11 @@ build/
 *.sock
 *.tar
 
-# OS SPECIFIC FILES
+# OS-SPECIFIC FILES
 .DS_Store
 Thumbs.db
 
-# PROJECT SPECIFIC EXCLUSIONS
+# PROJECT-SPECIFIC EXCLUSIONS
 zen_data/raw/*.csv
 zen_data/interim/
 zen_data/output/
