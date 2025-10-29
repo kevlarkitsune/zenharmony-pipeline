@@ -1,0 +1,42 @@
+# VIRTUAL ENVIRONMENT FOR PYTHON
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ENVIRONMENT FILES
+.env
+.env.*
+!example.env
+
+# IDE & EDITOR CONFIGS
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# BUILD, LOGS AND ARTIFACTS
+*.log
+*.sqlite3
+*.db
+*.pid
+*.gz
+*.egg-info/
+dist/
+build/
+
+# DOCKER VOLUMES
+*.pid
+*.sock
+*.tar
+
+# OS SPECIFIC FILES
+.DS_Store
+Thumbs.db
+
+# PROJECT SPECIFIC EXCLUSIONS
+zen_data/raw/*.csv
+zen_data/interim/
+zen_data/output/

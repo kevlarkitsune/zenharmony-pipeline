@@ -1,0 +1,13 @@
+--ZHARMONY PHASE 1: SCHEMA CREATION FOR 3X MEDALLION LAYERS
+--=========================================================
+
+--CREATE MEDALLION LAYERS
+CREATE SCHEMA IF NOT EXISTS zen_bronze;
+CREATE SCHEMA IF NOT EXISTS zen_silver;
+CREATE SCHEMA IF NOT EXISTS zen_gold;
+
+--FUTURE IDEAS:  MATERIALIZED VIEWS 
+--CREATE SCHEMA IF NOT EXISTS zen_marts;
+--CREATE SCHEMA IF NOT EXISTS zen_sandbox;
+
+--END OF SCHEMA SETUP======================================
