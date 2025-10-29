@@ -3,42 +3,6 @@ ZenHarmony is an automated, end-to-end ETL pipeline that utilizing practical dat
 
 ---
 
-## **Project Structure**
-
-```
-ZENHARMONY_PROJECT/
-│
-├── .venv
-│
-├── zen-reqruitment-pipeline/
-│ │
-│ ├── zen_data/
-│ │ └── raw/
-│ │ └── offerzen_jobs_history_raw.csv
-│ │
-│ ├── zen_db/
-│ │ └── sql/
-│ │ ├── 01_schema_setup.sql
-│ │ ├── 02_bronze_layer_setup.sql
-│ │ ├── 03_silver_layer_setup.sql
-│ │ └── 04_gold_layer_setup.sql
-│ │
-│ ├── zen_orchestration/
-│ │ └── zharmony_automation.py
-│ │
-│ └── zen_source/
-│ ├── zharmonyingest_csv.py
-│ └── zharmonyingest_api.py
-│
-├── .env.example (update name to .env.zenharmony)
-├── .gitignore
-├── README.md
-├── requirements.txt
-└── SOLUTION.md
-```
-
----
-
 ## **Project Overview**
 
 ZenHarmony enables a fully automated data pipeline that:
@@ -51,7 +15,7 @@ ZenHarmony enables a fully automated data pipeline that:
 7. Tracks and exposes data quality anomalies for transparency.
 
 **Core Features**
-- Modern layered ETL architecture (Bronze / Silver / Gold)
+- Modern layered ETL architecture (Bronze, Silver, Gold)
 - Idempotent automation (safe to rerun anytime)
 - Automated dependency and schema management
 - Clear separation between ingestion, transformation, and presentation
@@ -233,18 +197,23 @@ All tables and views should return data with no errors.
    ```bash
    docker run -d --name zen-postgres -e POSTGRES_USER=zenuser -e POSTGRES_PASSWORD=zenpassword -e POSTGRES_DB=zenharmony_BI -p 5432:5432 postgres:16
    ```
+   
+4. Create Virtual Environment  
+   ```bash
+   python -m venv .venv
+   ```
 
-3. Activate Virtual Environment  
+5. Activate Virtual Environment  
    ```bash
    .\.venv\Scripts\Activate
    ```
 
-4. Run Orchestration Tool  
+6. Run Orchestration Tool  
    ```bash
    python .\zen-reqruitment-pipeline\zen_orchestration\zharmony_automation.py
    ```
 
-5. Validate the data in DBeaver or psql
+7. Validate the data in DBeaver or psql
 
 ---
 
