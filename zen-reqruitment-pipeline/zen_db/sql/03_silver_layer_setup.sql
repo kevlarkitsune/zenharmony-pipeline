@@ -70,14 +70,7 @@ normalized AS
                 THEN NULL
             ELSE close_date
         END AS close_date_fixed
-
     FROM unified
-
-    --FUTURE CHECK: TITLE NORMALIZATION (NOT CURRENTLY NEEDED)
-    --FUTURE CHECK: URL NORMALIZATION (NOT CURRENTLY NEEDED)
-    --FUTURE CHECK: COMPANY NAME NORMALIZATION (NOT CURRENTLY NEEDED)
-    --FUTURE CHECK: ABSOLUTE URL NORMALIZATION (NOT CURRENTLY NEEDED)
-    -- -> All accounted for in jobview_dq_anomalies;
 )
 
 --DE-DUPLICATION
@@ -91,7 +84,6 @@ SELECT DISTINCT
     company_name,
     open_date,
     close_date_fixed AS close_date
-
 FROM normalized;
 
 --=========================
@@ -123,7 +115,6 @@ SELECT
   company_name,
   open_date_filled AS open_date,
   close_date
-
 FROM src
 WHERE close_date IS NULL OR close_date >= CURRENT_DATE;
 
@@ -245,7 +236,7 @@ SELECT
     is_negative_job_id,
     is_negative_internal_id,
 
-    --ISSUE SUMMARY FOR DQ VISIBILITY IN SELECT COUNT(*) FROM zen_silver.jobview_dq_anomalies;
+    --ISSUE SUMMARY FOR DQ VISIBILITY
     CONCAT_WS
     (', ',
         CASE WHEN is_missing_job_id          THEN 'missing job_id' END,
@@ -276,6 +267,5 @@ WHERE
     OR is_missing_open
     OR is_negative_job_id
     OR is_negative_internal_id;
-
 
 --END OF SILVER LAYER SETUP======================================
