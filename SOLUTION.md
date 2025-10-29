@@ -1,9 +1,11 @@
-# SOLUTION.md: ZenHarmony Technical Solution
+# ZenHarmony Technical Solution
 
 ## 1. Overview
 ZenHarmony is an end-to-end data engineering solution designed to automate the ingestion, transformation, and orchestration of OfferZen job data from both historical (CSV) and live (API) sources.  
 
-It applies the Medallion Architecture (Bronze, Silver, Gold) to ensure clear data lineage, modular transformation, and consistent analytical output, all managed through a single Python orchestration script.
+It applies the Medallion Architecture (Bronze, Silver, Gold) to ensure clear data lineage, modular transformation, and consistent analytical output.
+
+All of this is managed through a single Python orchestration script (zharmony_automation).
 
 ---
 
@@ -13,7 +15,7 @@ It applies the Medallion Architecture (Bronze, Silver, Gold) to ensure clear dat
 |:------|:---------|:--------|:-------------|
 | Bronze | Raw data ingestion | `zen_bronze` | `raw_history`, `raw_current` |
 | Silver | Data cleaning, normalization, and quality checks | `zen_silver` | `datacombined_clean`, `jobview_dq_anomalies` |
-| Gold** | Analytical & reporting layer (ready for BI tools) | `zen_gold` | `jobview_current_open`, `jobview_filling_time`, `jobview_openings_monthly`, `jobview_overview` |
+| Gold | Analytical & reporting layer (ready for BI tools) | `zen_gold` | `jobview_current_open`, `jobview_filling_time`, `jobview_openings_monthly`, `jobview_overview` |
 
 Bronze = preserves
 Silver = clarifies
@@ -57,7 +59,7 @@ Because each step uses “create if not exists” logic and truncates before ins
 
 ---
 
-## 6. Why Views Instead of Tables?
+## 6. Using Views Instead of Tables
 
 - Keeps transformations live and transparent.  
 - Reduces duplication and dependency on ETL jobs.  
@@ -93,15 +95,17 @@ Because each step uses “create if not exists” logic and truncates before ins
 
 - Migrate transformations to DBT for lineage tracking and modular reusability in case of larger data sets.  
 - Integrate visualization tools like Power BI for Gold-layer dashboards.  
-- Implement Airflow scheduling or cron-based refreshes.  
+- Implement scheduling or refreshes.  
 - Add unit tests (pytest) for ingestion and validation logic.  
-- Introduce data versioning (Delta or DuckDB) for historical auditability.
+- Introduce data versioning for historical auditability.
+- Implement Materialized Views for larger data sets.
+- Implement a QA Sandbox Environment.
 
 ---
 
 ## 10. Conclusion
 
-ZenHarmony achieves a fully operational data pipeline architecture.
+ZenHarmony achieves a fully operational data pipeline architecture.  I enjoyed this exercise so much, thank you!
 
 ## Author
 **kevlarkitsune**  
