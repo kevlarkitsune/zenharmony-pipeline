@@ -1,4 +1,4 @@
-# **ZenHarmony Data Pipeline**
+# **ZenHarmony**
 ZenHarmony is an automated, end-to-end ETL pipeline that utilizing practical data engineering, analytics modeling, ingestion and orchestration pipelines.  This stack is built entirely with Python, PostgreSQL, and SQLAlchemy.
 
 ---
@@ -106,21 +106,21 @@ This script:
 
 You’ll see console logs like:
 ```
-[2025-10-29 03:54:44] Starting ZenHarmony Orchestration ...
-[2025-10-29 03:54:45] ZenHarmony Packages Initialized: Installation Not Required ...
-[2025-10-29 03:54:45] Running ZenHarmony DB Setup Scripts ...
-[2025-10-29 03:54:45] Applying SQL: 01_schema_setup.sql Successful.
-[2025-10-29 03:54:45] Applying SQL: 02_bronze_layer_setup.sql Successful.
-[2025-10-29 03:54:45] Applying SQL: 03_silver_layer_setup.sql Successful.
-[2025-10-29 03:54:45] Applying SQL: 04_gold_layer_setup.sql Successful.
-[2025-10-29 03:54:45] ZenHarmony Database Structure Successfully Initialized.
+Starting ZenHarmony Orchestration ...
+ZenHarmony Packages Initialized: Installation Not Required ...
+Running ZenHarmony DB Setup Scripts ...
+[03:54:45] Applying SQL: 01_schema_setup.sql Successful.
+[03:54:45] Applying SQL: 02_bronze_layer_setup.sql Successful.
+[03:54:45] Applying SQL: 03_silver_layer_setup.sql Successful.
+[03:54:45] Applying SQL: 04_gold_layer_setup.sql Successful.
+[03:54:45] ZenHarmony Database Structure Successfully Initialized.
 
-$ python "C:\Users\kevin\Desktop\ZenHarmony_Project\zen-reqruitment-pipeline\zen_source\zharmonyingest_csv.py"
+$ python "..Desktop\ZenHarmony_Project\zen-reqruitment-pipeline\zen_source\zharmonyingest_csv.py"
 Loaded 316 rows into zen_bronze.raw_history
 
-$ python "C:\Users\kevin\Desktop\ZenHarmony_Project\zen-reqruitment-pipeline\zen_source\zharmonyingest_api.py"
+$ python "..\Desktop\ZenHarmony_Project\zen-reqruitment-pipeline\zen_source\zharmonyingest_api.py"
 Loaded 6 rows into zen_bronze.raw_current
-[2025-10-29 03:54:49] ZenHarmony Environment Orchestration Successful.
+[03:54:49] ZenHarmony Environment Orchestration Successful.
 ```
 
 ---
@@ -153,7 +153,7 @@ SELECT * FROM zen_gold.jobview_filling_time;
 SELECT * FROM zen_gold.jobview_openings_monthly;
 SELECT * FROM zen_gold.jobview_overview;
 
---4.1 Confirm Data Quality Checks (Sanity Check)
+--4.1 Confirm Data Anomaly Checks (Sanity Check)
 SELECT COUNT(*) FROM zen_silver.jobview_dq_anomalies;
 --4.2 View All Data Quality Anomalies (Missing Source Data)
 SELECT * FROM zen_silver.jobview_dq_anomalies;
@@ -219,4 +219,4 @@ All tables and views should return data with no errors.
 
 ## Author
 **kevlarkitsune**  
-*Create Harmony, Orchestrate Symphony.*
+*Color Harmony*
