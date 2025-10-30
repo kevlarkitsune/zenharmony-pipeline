@@ -1,9 +1,9 @@
 # ZenHarmony Technical Solution
 
 ## 1. Overview
-ZenHarmony is an end-to-end data engineering solution designed to automate the ingestion, transformation, and orchestration of OfferZen job data from both historical (CSV) and live (API) sources.  
+ZenHarmony is an end-to-end data engineering solution designed to automate the ingestion, transformation, and orchestration of job data from both historical (CSV) and live (API) sources.  
 
-It applies the Medallion Architecture (Bronze, Silver, Gold) to ensure clear data lineage, modular transformation, and consistent analytical output.
+It applies Medallion Architecture (Bronze, Silver, Gold) to ensure clear data lineage, modular transformation, and consistent analytical output.
 
 All of this is managed through a single Python orchestration script (zharmony_automation).
 
@@ -14,12 +14,8 @@ All of this is managed through a single Python orchestration script (zharmony_au
 | Layer | Purpose | Schema | Objects |
 |:------|:---------|:--------|:-------------|
 | Bronze | Raw data ingestion | `zen_bronze` | `raw_history`, `raw_current` |
-| Silver | Data cleaning, normalization, and quality checks | `zen_silver` | `datacombined_clean`, `jobview_dq_anomalies` |
+| Silver | Data cleaning, normalization, and quality checks | `zen_silver` | `datacombined_clean`, `jobview_dq_anomalies` 
 | Gold | Analytical & reporting layer (ready for BI tools) | `zen_gold` | `jobview_current_open`, `jobview_filling_time`, `jobview_openings_monthly`, `jobview_overview` |
-
-Bronze = preserves
-Silver = clarifies
-Gold = communicates
 
 ---
 
@@ -29,7 +25,7 @@ Gold = communicates
 - Silver: Cleans column values, normalizes data, fixes date logic, and performs deduplication.  
 - Gold: Aggregates data into analytical summaries following a star schema pattern (fact = job listings [datacombined_clean], dimensions = department, location, month).  
 
-All transformations are implemented using PostgreSQL views, ensuring data is always fresh and pipeline runs remain idempotent.
+All transformations are implemented using PostgreSQL views, ensuring data is always fresh and pipeline can rerun as required.
 
 ---
 
@@ -66,9 +62,6 @@ Because each step uses “create if not exists” logic and truncates before ins
 - Maintains a clean lineage, any upstream correction instantly reflects downstream.  
 - Makes the entire pipeline idempotent, i.e. you can rerun without any side effects.
 
-> Tables = history. 
-> Views = truth.
-
 ---
 
 ## 7. Error Handling & Data Quality Strategy
@@ -84,14 +77,14 @@ Because each step uses “create if not exists” logic and truncates before ins
 
 | Decision | Adopted | Trade-off |
 |:----------|:--------|:-----------|
-| Tables vs Views | Views | Non materialized (better for smaller datasets) |
+| Tables vs Views | Views | Non materialized |
 | DBT vs Direct SQL | Direct SQL | Less modular, but faster setup and no external tooling |
 | Airflow vs Python Script | Python Script | Simpler, self-contained orchestration |
 | Data Quality Fixes | Anomaly View | Exposes errors instead of overwriting them (better data governance/quality) |
 
 ---
 
-## 9. Potential for Future Enhancements
+## 9. Potential Future Enhancements
 
 - Migrate transformations to DBT for lineage tracking and modular reusability in case of larger data sets.  
 - Integrate visualization tools like Power BI for Gold-layer dashboards.  
@@ -105,8 +98,8 @@ Because each step uses “create if not exists” logic and truncates before ins
 
 ## 10. Conclusion
 
-ZenHarmony achieves a fully operational data pipeline architecture.  I enjoyed this exercise so much, thank you!
+ZenHarmony achieves a fully operational data pipeline architecture.  
 
 ## Author
 **kevlarkitsune**  
-*Create Harmony, Orchestrate Symphony.*
+*Color Harmony*
